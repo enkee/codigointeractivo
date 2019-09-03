@@ -1,0 +1,55 @@
+<p>
+    Noticias de curso de Angular
+</p>
+
+<section id="uno">
+    Contenido de la seccion 1 {{ datobody | json }}
+</section>
+
+<section id="dos">
+    Contenido de la seccion 3
+    <div class="form-group">
+        <label for="categoria">Categoria</label>
+        <select class="form-control" id="selectorNoticias" (change)="eventoControl($event)">
+            <option *ngFor="let cat of categorias" value="{{cat.codigo}}">{{cat.texto}}</option>
+        </select>
+    </div>
+
+    <div *ngFor="let noticia of noticias">
+
+        <div *ngIf="noticia.categoria.codigo==2; else opcion2">
+            <div class="row">
+                <div class="col-4">
+                    <img src="{{noticia.imagen}}" alt="" class="img-fluid">
+                </div>
+                <div class="col-8">
+                    <h5>{{noticia.titulo}}</h5>
+                    <p>{{noticia.texto}}</p>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #opcion2>
+            <div class="row">
+                <div class="col-12">
+                    <h5>{{noticia.titulo}}</h5>
+                    <p>{{noticia.texto}}</p>
+                </div>
+            </div>
+        </ng-template>
+
+    </div>
+</section>
+
+<section id="tres">
+    <h2>Listado de Informacion</h2>
+    <ul>
+        <li *ngFor="let objeto of informacion">
+            <p>{{objeto.Nombre | titlecase |slice:0:5}} | {{objeto.Apellido | uppercase}} |
+                {{objeto.sueldo | currency:'USD':true:'1.1-2'}}</p>
+            <p>{{objeto.Nombre | concatenarCurso:objeto.Apellido}}</p>
+        </li>
+    </ul>
+</section>
+
+{{informacion|json}}
